@@ -7,12 +7,7 @@ const userModel = require("../models/userModels")
         middleName:req.body.middleName,
         address:req.body.address
     })
-  if(  req.headers.authorization != "9989"){
-    res.status(403).json({
-        message:"You are not allowed to access this page"
-    })
-    return
-  }
+ 
     const userAdded = await newUser.save()
     if(userAdded){
         res.status(200).json({
@@ -26,6 +21,7 @@ const userModel = require("../models/userModels")
     }
 }
  const  getUser = async (req, res)=>{
+    console.log(req.user)
     const users = await userModel.find({}) 
     res.status(200).json({
         message: "Users Fetched sucessfulyy",
